@@ -4,7 +4,7 @@ const formatTitleCategory = require("../utils/formatTitleCategory");
 class CategoriesController {
     static async get(req, res) {
         try {
-            const categories = await CategoryModel.find({ user: req.userId }, "title");
+            const categories = await CategoryModel.find({ user: req.userId }, "title type");
             if (!categories) {
                 return res.status(404).json({ message: "Categories are not found" })
             }
@@ -18,7 +18,7 @@ class CategoriesController {
 
     static async add(req, res) {
         try {
-            const { title } = req.body;
+            const { title, type } = req.body;
             const formatTitle = formatTitleCategory(title);
 
             const category = await CategoryModel.findOne({ title: formatTitle });
@@ -31,6 +31,7 @@ class CategoriesController {
 
             const doc = new CategoryModel({ 
                 title: formatTitle,
+                type,
                 user: req.userId 
             });
             await doc.save();

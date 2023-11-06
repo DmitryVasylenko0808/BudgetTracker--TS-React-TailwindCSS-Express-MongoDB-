@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
 const categoriesRoutes = require("./routes/categories");
+const transactionsRoutes = require("./routes/transactions");
 
 const app = express();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/categories", categoriesRoutes);
+app.use("/api/transactions", transactionsRoutes);
 
 const main = async () => {
     try {

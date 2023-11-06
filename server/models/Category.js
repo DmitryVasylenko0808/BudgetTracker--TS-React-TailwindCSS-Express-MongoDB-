@@ -6,6 +6,11 @@ const CategorySchema = new mongoose.Schema({
         required: true,
         unique: true
     },
+    type: {
+        type: String,
+        enum: ["Income", "Outcome"],
+        required: true
+    },
     user: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
