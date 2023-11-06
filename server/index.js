@@ -4,6 +4,7 @@ const config = require("./config");
 const mongoose = require("mongoose");
 
 const authRoutes = require("./routes/auth");
+const categoriesRoutes = require("./routes/categories");
 
 const app = express();
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
+app.use("/api/categories", categoriesRoutes);
 
 const main = async () => {
     try {

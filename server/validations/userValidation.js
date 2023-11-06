@@ -1,5 +1,4 @@
 const { body } = require("express-validator");
-const UserModel = require("../models/User");
 
 const signUpValidation = [
     body("login", "Login is required").trim().notEmpty(),
