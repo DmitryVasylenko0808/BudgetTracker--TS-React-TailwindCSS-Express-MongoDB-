@@ -4,12 +4,40 @@ const TransactionModel = require("../models/Transaction");
 class TransactionController {
     static async get(req, res) {
         try {
-            const transactions = await TransactionModel.find(
-                {
-                    user: req.userId
-                },
-                "-user"
-            );
+            const { year, month, limit, skip, type, category } = req.params;
+
+            const fromDate = `${year}-${month}-01`;
+            const toDate = `${year}-${month}-31`;
+            const filter = {
+                user: req.userId,
+                date: {
+                    $gte: fromDate,
+                    $lte: toDate
+                }
+            }
+
+            if (type !== "all") {
+                const types = ["Income", "Outcome"];
+                if (!types.includes(type)) {
+                    return res.status(400).json({ message: "Invalid type" });
+                }
+
+                filter.type = type;
+            }
+
+            if (category !== "all") {
+                const categoryFind = await CategoryModel.findOne({ title: category, user: req.userId });
+                if (!categoryFind) {
+                    return res.status(400).json({ message: "Invalid category" });
+                }
+                filter.category = categoryFind._id;
+            }
+
+            const transactions = await TransactionModel.find(filter, "-user")
+                .skip(limit * skip)
+                .limit(limit)
+                .populate("category", "title"); 
+
             if (!transactions) {
                 return res.status(404).json({ message: "Transactions are not found" });
             }
@@ -34,7 +62,7 @@ class TransactionController {
             let doc;
             if (req.body.date) {
                 doc = new TransactionModel({
-                    date: req.body.date,
+                    date: new Date(req.body.date),
                     description: req.body.description,
                     category: category._id,
                     type: req.body.type,
@@ -61,7 +89,7 @@ class TransactionController {
 
     static async edit(req, res) {
         try {
-            const category = await CategoryModel.findOne({ title: req.body.category });
+            const category = await CategoryModel.findOne({ title: req.body.category }); // user
             if (!category) {
                 return res.status(400).json({
                     path: "category",
@@ -102,7 +130,7 @@ class TransactionController {
                 _id: { 
                     $in: ids 
                 } 
-            });
+            }); // user
 
             res.json(true);
         } catch (err) {

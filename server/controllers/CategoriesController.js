@@ -51,7 +51,7 @@ class CategoriesController {
             const category = await CategoryModel.findByIdAndUpdate(
                 req.params.id,
                 {
-                    title: formatTitle
+                    title: formatTitle,
                 }
             );
 
