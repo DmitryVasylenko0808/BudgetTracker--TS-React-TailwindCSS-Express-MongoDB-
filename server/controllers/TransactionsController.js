@@ -64,6 +64,26 @@ class TransactionController {
         }
     }
 
+    static async seacrh(req, res) {
+        try {
+            const pattern = new RegExp(`.*${req.params.text}.*`);
+
+            const transactions = await TransactionModel.find({ 
+                description: { $regex: pattern, $options: "i" },
+                user: req.userId
+            });
+            
+            if (!transactions.length) {
+                return res.status(404).json({ message: "Transaction is not found" });
+            }
+
+            res.json(transactions);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: "Internal Error" });
+        }
+    }
+
     static async add(req, res) {
         try {
             const category = await CategoryModel.findOne({ title: req.body.category });
