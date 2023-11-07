@@ -35,8 +35,6 @@ class TransactionController {
             }
 
             const transactions = await TransactionModel.find(filter, "-user")
-                .skip(limit * skip)
-                .limit(limit)
                 .populate("category", "title"); 
 
             if (!transactions) {
@@ -72,7 +70,7 @@ class TransactionController {
                 description: { $regex: pattern, $options: "i" },
                 user: req.userId
             });
-            
+
             if (!transactions.length) {
                 return res.status(404).json({ message: "Transaction is not found" });
             }

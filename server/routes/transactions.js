@@ -6,7 +6,7 @@ const { transactionValidation } = require("../validations/transactionValidation"
 
 const router = express.Router();
 
-router.get("/:year/:month/:limit/:skip/:type/:category", isAuthorized, TransactionController.get);
+router.get("/:year/:month/:type/:category", isAuthorized, TransactionController.get);
 router.get("/evolution/:type/:periodType/:category", isAuthorized, TransactionController.getEvolution);
 router.get("/search/:text", isAuthorized, TransactionController.seacrh);
 router.post("/", isAuthorized, transactionValidation, handleValidationErrors, TransactionController.add);
