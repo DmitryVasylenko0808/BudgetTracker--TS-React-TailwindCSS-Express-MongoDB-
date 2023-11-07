@@ -1,5 +1,6 @@
 const CategoryModel = require("../models/Category");
 const TransactionModel = require("../models/Transaction");
+const calculateEvolution = require("../utils/calculateEvolution");
 
 class TransactionController {
     static async get(req, res) {
@@ -49,6 +50,20 @@ class TransactionController {
         }
     }
 
+    static async getEvolution(req, res) {
+        try {
+            const { type, periodType, category } = req.params;
+
+            const transactions = await TransactionModel.find({ user: req.userId }).populate("category", "title");
+            const result = calculateEvolution(transactions, type, periodType, category);
+
+            res.json(result);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({ message: "Internal Error" });
+        }
+    }
+
     static async add(req, res) {
         try {
             const category = await CategoryModel.findOne({ title: req.body.category });
@@ -89,7 +104,7 @@ class TransactionController {
 
     static async edit(req, res) {
         try {
-            const category = await CategoryModel.findOne({ title: req.body.category }); // user
+            const category = await CategoryModel.findOne({ title: req.body.category, user: req.userId });
             if (!category) {
                 return res.status(400).json({
                     path: "category",
@@ -129,8 +144,9 @@ class TransactionController {
             await TransactionModel.deleteMany({ 
                 _id: { 
                     $in: ids 
-                } 
-            }); // user
+                },
+                user: req.userId 
+            });
 
             res.json(true);
         } catch (err) {
