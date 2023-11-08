@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useSignInUserMutation } from "../../redux/services/authApi";
+import { useNavigate } from "react-router";
 import TextField from "../TextField";
+import { useAppDispatch } from "../../redux/hooks";
+import { setUserInfo } from "../../redux/slices/authSlice";
 
 type LoginFormFields = {
     login: { value: string },
@@ -8,6 +11,8 @@ type LoginFormFields = {
 };
 
 const LoginForm = () => {
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const [error, setError] = useState<any>(null);
 
     const [signIn, { isLoading }] = useSignInUserMutation();
@@ -20,29 +25,31 @@ const LoginForm = () => {
             login: target.login.value,
             password: target.password.value
         };
-        
-        await signIn(data).unwrap()
-            .then(() => { alert("Success!") })
-            .catch(err => { 
-                console.log(err);
-                setError(err.data); 
+
+        signIn(data).unwrap()
+            .then((data) => { 
+                dispatch(setUserInfo(data));
+                navigate("/"); 
+            })
+            .catch(err => {
+                setError(err.data);
             });
     }
 
     return (
         <form onSubmit={handleSubmit} className="mb-8 flex flex-col gap-y-4">
-            <TextField 
-                id="login" 
-                title="Login" 
-                isError={error && (error.path === "login" || error.path === "")} 
-                error={error && error.path === "login" && error.message} 
+            <TextField
+                id="login"
+                title="Login"
+                isError={error && (error.path === "login" || error.path === "")}
+                error={error && error.path === "login" && error.message}
             />
-            <TextField 
-                id="password" 
-                title="Password" 
-                type="password" 
-                isError={error && (error.path === "password" || error.path === "")} 
-                error={error && error.path === "password" && error.message} 
+            <TextField
+                id="password"
+                title="Password"
+                type="password"
+                isError={error && (error.path === "password" || error.path === "")}
+                error={error && error.path === "password" && error.message}
             />
             <span className="min-h-[14px] text-center text-sm text-red-600">{error && error.path === "" && error.message}</span>
             <button

@@ -1,25 +1,33 @@
 import { empltySplitApi } from "./emptySplitApi";
+import { LoginRequest, LoginResponse, RegisterRequest, User } from "./types";
 
 export const authApi = empltySplitApi.injectEndpoints({
     endpoints: builder => ({
-        signUpUser: builder.mutation<any, any>({
+        getInfoUser: builder.query<User, null>({
+            query: () => "/auth/me",
+            providesTags: ["User"]
+        }),
+        signUpUser: builder.mutation<boolean, RegisterRequest>({
             query: body => ({
                 url: "/auth/signup",
                 method: "POST",
                 body
-            })
+            }),
+            invalidatesTags: ["User"]
         }),
-        signInUser: builder.mutation<any, any>({
+        signInUser: builder.mutation<LoginResponse, LoginRequest>({
             query: body => ({
                 url: "/auth/signin",
                 method: "POST",
                 body
-            })
+            }),
+            invalidatesTags: ["User"]
         })
     })
 });
 
 export const {
+    useGetInfoUserQuery,
     useSignUpUserMutation,
     useSignInUserMutation
-} = authApi
+} = authApi;

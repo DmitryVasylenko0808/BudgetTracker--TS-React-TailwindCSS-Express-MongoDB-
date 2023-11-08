@@ -11,7 +11,7 @@ class AuthController {
                 return res.status(404).json({ message: "User is not found" });
             }
 
-            const { password_hash, ...userData} = user._doc;
+            const { password_hash, ...userData } = user._doc;
 
             res.json(userData);
         } catch (err) {
@@ -75,7 +75,9 @@ class AuthController {
                 }
             );
 
-            res.json(token)
+            const { password_hash, ...userData } = user._doc;
+
+            res.json({ ...userData, token});
         } catch (err) {
             console.log(err);
             res.status(500).json({ message: "Internal error" })
