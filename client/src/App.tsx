@@ -1,6 +1,4 @@
 import React from 'react';
-import { HiOutlineCurrencyDollar, HiUser, HiLogout, HiOutlineSearch } from "react-icons/hi";
-import Header from './components/Header';
 import { Route, Routes } from 'react-router';
 import MainLayout from './layouts/MainLayout';
 import TransactionsPage from './pages/TransactionsPage';

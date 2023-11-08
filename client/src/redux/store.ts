@@ -1,9 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
+import { empltySplitApi } from "./services/emptySplitApi";
 
 export const store = configureStore({
-    reducer: {},
-    middleware: (getDefaultMiddeware) => getDefaultMiddeware().concat()
+    reducer: {
+        [empltySplitApi.reducerPath]: empltySplitApi.reducer
+    },
+    middleware: (getDefaultMiddeware) => getDefaultMiddeware().concat(empltySplitApi.middleware)
 });
 
 setupListeners(store.dispatch);
