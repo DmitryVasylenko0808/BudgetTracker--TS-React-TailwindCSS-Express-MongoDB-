@@ -10,8 +10,6 @@ type TextFieldProps = {
 };
 
 const TextField = ({ id, title, type = "text", value, isError, error }: TextFieldProps) => {
-    console.log(error);
-
     let invalidInputClassname = "";
     if (isError || error) {
         invalidInputClassname = "border-red-600";

@@ -16,3 +16,21 @@ export type LoginRequest = {
 };
 
 export type LoginResponse = User & { token: string };
+
+export type CategoryType = "Income" | "Outcome";
+
+export type Category = {
+    _id: string,
+    title: string,
+    type: CategoryType
+};
+
+export type AddCategoryRequest = {
+    title: string,
+    type: CategoryType
+};
+
+export type RenameCategoryRequest = {
+    id: string,
+    title: string
+};

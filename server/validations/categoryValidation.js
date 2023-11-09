@@ -1,6 +1,6 @@
 const { body } = require("express-validator");
 
-const categoryValidation = [
+const addCategoryValidation = [
     body("title", "Title is required").trim().notEmpty(),
     body("type").custom(value => {
         const types = ["Income", "Outcome"];
@@ -12,4 +12,11 @@ const categoryValidation = [
     })
 ];
 
-module.exports = { categoryValidation };
+const renameCategoryValidation = [
+    body("title", "Title is required").trim().notEmpty()
+];
+
+module.exports = { 
+    addCategoryValidation, 
+    renameCategoryValidation
+};

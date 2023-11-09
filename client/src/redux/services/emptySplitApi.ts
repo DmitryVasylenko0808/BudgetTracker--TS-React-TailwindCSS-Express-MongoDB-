@@ -8,6 +8,6 @@ export const empltySplitApi = createApi({
             headers.set("authorization", `Bearer ${localStorage.getItem("token")}`)
         }
     }),
-    tagTypes: ["User"],
+    tagTypes: ["User", "Categories"],
     endpoints: () => ({})
 });

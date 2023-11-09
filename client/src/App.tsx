@@ -23,7 +23,10 @@ const App = () => {
 
   useEffect(() => {
     if (authData) {
-      dispatch(setUserInfo({ ...authData, token: localStorage.getItem("token") }));
+      dispatch(setUserInfo({ 
+        ...authData, 
+        token: localStorage.getItem("token") 
+      }));
     }
   }, [authData]);
 
