@@ -12,7 +12,7 @@ const Header = () => {
     const handleLogOutClick = () => dispatch(logOut());
 
     return (
-        <header className="sticky top-0 py-6 bg-navy-light shadow-md">
+        <header className="sticky top-0 z-20 py-6 bg-navy-light shadow-md">
             <div className="max-w-[1440px] mx-auto px-5">
                 <div className="flex items-center">
                     <a className="flex items-center gap-x-3 text-white" href="#">

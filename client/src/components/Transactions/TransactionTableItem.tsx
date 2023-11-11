@@ -1,0 +1,29 @@
+import React from "react";
+import { Transaction } from "../../redux/services/types";
+import { formatDate } from "../../utils/formatDate"; //
+
+
+type TransactionsTableItemProps = {
+    isSelected: boolean,
+    transaction: Transaction,
+    onSelect: () => void
+};
+
+const TransactionsTableItem = ({ isSelected, transaction, onSelect }: TransactionsTableItemProps) => {
+    const selectedClassName = isSelected ? "bg-navy-light/20 odd:bg-navy-light/20" : "";
+
+    return (
+        <tr onClick={onSelect} className={`flex odd:bg-gray-light/50 hover:bg-navy-light/20 ${selectedClassName}`}>
+            <td className="px-4 py-2 border-x border-gray-light">
+                <input type="checkbox" aria-label="check" checked={isSelected} />
+            </td>
+            <td className="px-4 py-2 border-x border-gray-light w-[160px]">{formatDate(transaction.date as Date)}</td>
+            <td className="px-4 py-2 border-x border-gray-light flex-auto">{transaction.description}</td>
+            <td className="px-4 py-2 border-x border-gray-light w-[150px]">{transaction.category?.title}</td>
+            <td className="px-4 py-2 border-x border-gray-light w-[130px]">{transaction.type}</td>
+            <td className="px-4 py-2 border-x border-gray-light w-[170px]">{transaction.sum.toFixed(2)}</td>
+        </tr>
+    );
+}
+
+export default TransactionsTableItem;

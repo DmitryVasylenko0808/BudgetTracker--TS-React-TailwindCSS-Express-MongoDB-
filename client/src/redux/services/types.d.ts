@@ -1,3 +1,7 @@
+/* ------------------ */
+/*        USERS       */
+/* ------------------ */
+
 export type User = {
     _id: string,
     login: string,
@@ -17,6 +21,10 @@ export type LoginRequest = {
 
 export type LoginResponse = User & { token: string };
 
+/* ------------------ */
+/*     CATEGORIES     */
+/* ------------------ */
+
 export type CategoryType = "Income" | "Outcome";
 
 export type Category = {
@@ -33,4 +41,38 @@ export type AddCategoryRequest = {
 export type RenameCategoryRequest = {
     id: string,
     title: string
+};
+
+/* -------------------- */
+/*     TRANSACTIONS     */
+/* -------------------- */
+
+export type Transaction = {
+    _id: string,
+    date: Date | null,
+    description: string,
+    category: Omit<Category, "type">,
+    type: CategoryType,
+    sum: number
+};
+
+export type GetTransactionRequest = {
+    year: string,
+    month: string,
+    type: CategoryType | "all",
+    category: string | "all"
+};
+
+export type AddTransactionRequest = {
+    date: Date | null,
+    description: string,
+    category: string,
+    type: CategoryType,
+    sum: number
+};
+
+export type EditTransactionRequest = AddTransactionRequest & { id: string };
+
+export type DeleteTransactionsRequest = {
+    ids: string[]
 };
