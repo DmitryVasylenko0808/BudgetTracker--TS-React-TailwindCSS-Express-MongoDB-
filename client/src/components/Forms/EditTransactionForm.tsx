@@ -8,7 +8,7 @@ import DatePicker from "../DatePicker";
 import { useAddTransactionMutation, useEditTransactionMutation } from "../../redux/services/transactionApi";
 
 type EditTransactionFormProps = {
-    transaction: Transaction
+    transaction: Transaction,
     onCloseModal?: () => void
 }
 

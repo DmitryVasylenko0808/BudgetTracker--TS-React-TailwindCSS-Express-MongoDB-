@@ -1,12 +1,18 @@
 import React from "react";
+import { Transaction } from "../../redux/services/types";
+import TransactionsTableItem from "./TransactionTableItem";
 
 type TransactionsTableProps = {
+    transactions: Transaction[],
+    selectedTransactions: Transaction[],
     isSelectedAll: boolean,
-    children: React.ReactNode,
-    onSelectAll: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onSelectAll: (e: React.ChangeEvent<HTMLInputElement>) => void,
+    onSelectItem: (id: string) => void
 }
 
-const TransactionsTable = ({ isSelectedAll, children, onSelectAll }: TransactionsTableProps) => {
+const TransactionsTable = ({ transactions, selectedTransactions, isSelectedAll, onSelectAll, onSelectItem }: TransactionsTableProps) => {
+    
+
     return (
         <table className="w-full border border-gray-light shadow-xl">
             <thead className="border-b border-gray-light">
@@ -27,7 +33,14 @@ const TransactionsTable = ({ isSelectedAll, children, onSelectAll }: Transaction
                 </tr>
             </thead>
             <tbody>
-                {children}
+                {transactions.map(t =>
+                    <TransactionsTableItem
+                        transaction={t}
+                        isSelected={!!selectedTransactions.find(s => s._id === t._id)}
+                        onSelect={() => onSelectItem(t._id)}
+                        key={t._id}
+                    />
+                )}
             </tbody>
         </table>
     );

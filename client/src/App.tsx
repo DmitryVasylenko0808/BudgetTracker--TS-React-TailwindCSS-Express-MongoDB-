@@ -13,6 +13,7 @@ import { useGetInfoUserQuery } from './redux/services/authApi';
 import { useAppDispatch, useAppSelect } from './redux/hooks';
 import { setUserInfo } from './redux/slices/authSlice';
 import { useAuth } from '.';
+import SearchTransactionsPage from './pages/SearchTransactionsPage';
 
 const App = () => {
   const { isAuthorized, token } = useAuth();
@@ -35,6 +36,7 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route element={<RequireAuth />}>
           <Route index element={<TransactionsPage />} />
+          <Route path="/search/:value" element={<SearchTransactionsPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/evolution" element={<EvolutionPage />} />

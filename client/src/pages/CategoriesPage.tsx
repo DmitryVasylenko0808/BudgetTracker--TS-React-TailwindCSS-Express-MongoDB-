@@ -88,17 +88,13 @@ const CategoriesPage = () => {
                 </div>
             </div>
 
-            {isAddOpen &&
-                <Modal onClose={handleCloseAddModal}>
-                    <AddCategoryForm onCloseModal={handleCloseAddModal} />
-                </Modal>
-            }
+            <Modal isOpen={isAddOpen} onClose={handleCloseAddModal}>
+                <AddCategoryForm onCloseModal={handleCloseAddModal} />
+            </Modal>
 
-            {isRenameOpen &&
-                <Modal onClose={handleCloseRenameModal}>
-                    <RenameCategoryForm category={selectedCategory} onCloseModal={handleCloseRenameModal} />
-                </Modal>
-            }
+            <Modal isOpen={isRenameOpen} onClose={handleCloseRenameModal}>
+                <RenameCategoryForm category={selectedCategory} onCloseModal={handleCloseRenameModal} />
+            </Modal>
         </div>
     );
 }

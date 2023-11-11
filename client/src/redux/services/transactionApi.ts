@@ -30,6 +30,10 @@ export const transactionsApi = empltySplitApi.injectEndpoints({
                 body
             }),
             invalidatesTags: ["Transactions"]
+        }),
+        searchTransactions: builder.query<Transaction[], string | undefined>({
+            query: value => `/transactions/search/${value}`,
+            providesTags: ["Categories", "Transactions"]
         })
     })
 });
@@ -38,5 +42,6 @@ export const {
     useGetTransactionQuery,
     useAddTransactionMutation,
     useEditTransactionMutation,
-    useDeleteTransactionsMutation
+    useDeleteTransactionsMutation,
+    useSearchTransactionsQuery
 } = transactionsApi;

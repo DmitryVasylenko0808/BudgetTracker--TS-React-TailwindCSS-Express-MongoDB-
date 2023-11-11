@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CategoryType, Transaction } from "../../redux/services/types";
-import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
 import { useDeleteTransactionsMutation, useGetTransactionQuery } from "../../redux/services/transactionApi";
-import TransactionsTableItem from "./TransactionTableItem";
 import TransactionsMenu from "./TransactionsMenu";
 import Modal from "../Modal";
 import AddTransactionForm from "../Forms/TransactionAddForm";
@@ -11,16 +9,19 @@ import EditTransactionForm from "../Forms/EditTransactionForm";
 import TransactionsTable from "./TransactionsTable";
 import TransactionsTotal from "./TransactionsTotal";
 
-const TransactionsContainer = () => {
-    const [isOpenAdd, setIsOpenAdd] = useState<Boolean>(false);
+type TransactionsContainerProps = {
+    data: Transaction[],
+    isSearch?: boolean
+}
+
+const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainerProps) => {
+    const [isOpenAdd, setIsOpenAdd] = useState<boolean>(false);
     const [isEditOpen, setIsOpenEdit] = useState<boolean>(false);
     const [selectedTransactions, setSelectedTransactions] = useState<Transaction[]>([]);
     const [searchParams] = useSearchParams();
 
     const year = searchParams.get("year") as string;
     const month = searchParams.get("month") as string;
-    const type: CategoryType | "all" = searchParams.get("type") as CategoryType | "all";
-    const category: string | "all" = searchParams.get("category") as string | "all";
 
     const months = [
         "January", "February", "March",
@@ -30,7 +31,6 @@ const TransactionsContainer = () => {
     ]; 
     const fullMonth = months[parseFloat(month) - 1]; //
 
-    const { data, isLoading } = useGetTransactionQuery({ year, month, type: type, category: category });
     const [deleteTransactions] = useDeleteTransactionsMutation();
 
     useEffect(() => {
@@ -73,19 +73,13 @@ const TransactionsContainer = () => {
             .unwrap()
             .then(() => { })
             .catch(err => { })
-            .finally(() => setSelectedTransactions([]))
-    }
-
-    
-
-    if (isLoading) {
-        return <div>Loading...</div>
+            .finally(() => setSelectedTransactions([])) //
     }
 
     return (
         <>
             <div className="mb-8 flex justify-between items-center">
-                <h2 className="text-xl font-bold">{fullMonth} {year}</h2>
+                {!isSearch && <h2 className="text-xl font-bold">{fullMonth} {year}</h2>}
                 <TransactionsTotal 
                     transactions={selectedTransactions.length 
                         ? selectedTransactions 
@@ -93,6 +87,7 @@ const TransactionsContainer = () => {
                     } 
                 />
                 <TransactionsMenu
+                    isRemovedAdd={isSearch}
                     isDisabledEdit={!selectedTransactions.length || selectedTransactions.length > 1}
                     isDisabledDelete={!selectedTransactions.length}
                     onAdd={handleOpenAddModal}
@@ -101,38 +96,29 @@ const TransactionsContainer = () => {
                 />
             </div>
 
-            {data?.length
+            {data && data?.length
                 ? <TransactionsTable
+                    transactions={data}
+                    selectedTransactions={selectedTransactions}
                     isSelectedAll={selectedTransactions.length === data?.length}
                     onSelectAll={handleSelectAllTransactions}
-                >
-                    {data?.map(t =>
-                        <TransactionsTableItem
-                            transaction={t}
-                            isSelected={!!selectedTransactions.find(s => s._id === t._id)}
-                            onSelect={() => handleSelectTransaction(t._id)}
-                            key={t._id}
-                        />
-                    )}
-                </TransactionsTable>
-
+                    onSelectItem={handleSelectTransaction}
+                  />
                 : <div className="">No data</div>
             }
 
-            {isOpenAdd &&
-                <Modal onClose={handeCloseAddModal}>
-                    <AddTransactionForm onCloseModal={handeCloseAddModal} />
-                </Modal>
-            }
+            <Modal isOpen={isOpenAdd} onClose={handeCloseAddModal}>
+                <AddTransactionForm onCloseModal={handeCloseAddModal} />
+            </Modal>
 
-            {isEditOpen &&
-                <Modal onClose={handeCloseEditModal}>
+            <Modal isOpen={!!selectedTransactions.length && isEditOpen} onClose={handeCloseEditModal}>
+                {selectedTransactions.length && 
                     <EditTransactionForm
                         transaction={selectedTransactions[0]}
                         onCloseModal={handeCloseEditModal}
                     />
-                </Modal>
-            }
+                }
+            </Modal>
         </>
     );
 }
