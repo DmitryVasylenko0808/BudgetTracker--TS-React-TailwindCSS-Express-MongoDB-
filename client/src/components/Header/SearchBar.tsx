@@ -7,7 +7,9 @@ const SearchBar = () => {
     const navigate = useNavigate();
 
     const handleSearch = () => {
-        navigate(`/search/${search}`, { replace: true });
+        if (search) {
+            navigate(`/search/${search}`, { replace: true });
+        }
     }
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);

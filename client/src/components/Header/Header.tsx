@@ -2,8 +2,8 @@ import React from "react";
 import { HiOutlineCurrencyDollar, HiUser, HiLogout } from "react-icons/hi";
 import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
-import { useAppDispatch, useAppSelect } from "../redux/hooks";
-import { logOut } from "../redux/slices/authSlice";
+import { useAppDispatch, useAppSelect } from "../../redux/hooks";
+import { logOut } from "../../redux/slices/authSlice";
 
 const Header = () => {
     const dispatch = useAppDispatch();

@@ -35,7 +35,7 @@ const calculateEvolution = (transactions, type, periodType, category) => {
     
         for (const year of years) {
             for (const month of months) {
-                const transactionsForMonth = evolution.filter(e => e.date.getFullYear() === year && e.date.getMonth() === month);
+                const transactionsForMonth = evolution.filter(e => e.date.getFullYear() === year && e.date.getMonth() === month - 1);
                 const totalSum = parseFloat(transactionsForMonth.reduce((acc, curr) => (acc + curr.sum), 0).toFixed(2));
     
                 const resultItem = {

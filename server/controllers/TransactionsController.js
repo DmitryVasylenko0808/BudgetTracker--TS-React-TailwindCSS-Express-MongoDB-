@@ -48,20 +48,6 @@ class TransactionController {
         }
     }
 
-    static async getEvolution(req, res) {
-        try {
-            const { type, periodType, category } = req.params;
-
-            const transactions = await TransactionModel.find({ user: req.userId }).populate("category", "title");
-            const result = calculateEvolution(transactions, type, periodType, category);
-
-            res.json(result);
-        } catch (err) {
-            console.log(err);
-            res.status(500).json({ message: "Internal Error" });
-        }
-    }
-
     static async seacrh(req, res) {
         try {
             const { type, category } = req.params;
