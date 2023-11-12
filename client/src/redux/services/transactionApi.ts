@@ -1,5 +1,5 @@
 import { empltySplitApi } from "./emptySplitApi";
-import { AddTransactionRequest, DeleteTransactionsRequest, EditTransactionRequest, GetTransactionRequest, Transaction } from "./types";
+import { AddTransactionRequest, DeleteTransactionsRequest, EditTransactionRequest, GetTransactionRequest, SearchTransactionsRequest, Transaction } from "./types";
 
 export const transactionsApi = empltySplitApi.injectEndpoints({
     endpoints: builder => ({
@@ -31,8 +31,8 @@ export const transactionsApi = empltySplitApi.injectEndpoints({
             }),
             invalidatesTags: ["Transactions"]
         }),
-        searchTransactions: builder.query<Transaction[], string | undefined>({
-            query: value => `/transactions/search/${value}`,
+        searchTransactions: builder.query<Transaction[], SearchTransactionsRequest>({
+            query: ({ value, type, category }) => `/transactions/search/value/${value}/${type}/${category}`,
             providesTags: ["Categories", "Transactions"]
         })
     })

@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router";
 import { useSearchTransactionsQuery } from "../redux/services/transactionApi";
 import TransactionsContainer from "../components/Transactions/TransactionsContainer";
+import { useSearchParams } from "react-router-dom";
+import { CategoryType } from "../redux/services/types";
 
 const SearchTransactionsPage = () => {
     const { value } = useParams();
+    const [searchParams, setSearchParams] = useSearchParams();
 
-    const { data, isLoading } = useSearchTransactionsQuery(value);
+    const type: CategoryType | "all" = searchParams.get("type") ? searchParams.get("type") as CategoryType | "all" : "all"; //
+    const category: string = searchParams.get("category") ? searchParams.get("category") as string : "all"; //
+
+    const { data, isLoading } = useSearchTransactionsQuery({ value, type, category });
+
+    useEffect(() => {
+        if (data) {
+            setSearchParams({
+                type: "all",
+                category: "all"
+            });
+        }
+    }, [])
 
     if (isLoading) {
         return <div>Loading...</div>

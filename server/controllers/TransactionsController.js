@@ -64,12 +64,28 @@ class TransactionController {
 
     static async seacrh(req, res) {
         try {
+            const { type, category } = req.params;
             const pattern = new RegExp(`.*${req.params.text}.*`);
 
-            const transactions = await TransactionModel.find({ 
-                description: { $regex: pattern, $options: "i" },
-                user: req.userId
-            }, "-user").populate("category", "title");
+            const filter = {
+                user: req.userId,
+                description: { $regex: pattern, $options: "i" }
+            }
+
+            if (type !== "all") {
+                filter.type = type; 
+            }
+            if (category !== "all") {
+                const categoryFind = await CategoryModel.findOne({ title: category, user: req.userId });
+                if (!categoryFind) {
+                    return res.status(400).json({ message: "Invalid category" });
+                }
+                filter.category = categoryFind._id;
+            }
+
+            const transactions = await TransactionModel
+                .find(filter, "-user")
+                .populate("category", "title");
 
             if (!transactions.length) {
                 return res.status(404).json({ message: "Transaction is not found" });

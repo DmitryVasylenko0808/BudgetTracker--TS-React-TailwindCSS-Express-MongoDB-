@@ -22,7 +22,7 @@ const TransactionFilter = () => {
             month: searchParams.get("month") as string,
             type: type as string,
             category: searchParams.get("category") as string 
-        })
+        }) //
     }
 
     const handleSelectCategory = (category: string) => {
@@ -31,7 +31,7 @@ const TransactionFilter = () => {
             month: searchParams.get("month") as string,
             type: searchParams.get("type") as string,
             category
-        })
+        }) //
     }
 
     const handleToggle = () => setIsOpen(!isOpen);

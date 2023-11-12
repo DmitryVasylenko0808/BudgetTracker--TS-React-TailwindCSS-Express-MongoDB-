@@ -36,7 +36,7 @@ const TransactionsPage = () => {
                 category: "all" 
             },
             { replace: true }
-        );
+        ); //
     }, []);
 
     const handleSelectYear = (year: number) => {
@@ -48,7 +48,7 @@ const TransactionsPage = () => {
                 category: searchParams.get("category") as string 
             },
             { replace: true }
-        );
+        ); //
     };
 
     const handleSelectMonth = (month: string) => {
@@ -60,7 +60,7 @@ const TransactionsPage = () => {
                 category: searchParams.get("category") as string 
             },
             { replace: true }
-        );
+        ); //
     };
 
     if (isLoading) {

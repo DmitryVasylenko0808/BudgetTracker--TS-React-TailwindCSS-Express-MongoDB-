@@ -76,3 +76,9 @@ export type EditTransactionRequest = AddTransactionRequest & { id: string };
 export type DeleteTransactionsRequest = {
     ids: string[]
 };
+
+export type SearchTransactionsRequest = {
+    value?: string,
+    type: CategoryType | "all",
+    category: string | "all"
+};
