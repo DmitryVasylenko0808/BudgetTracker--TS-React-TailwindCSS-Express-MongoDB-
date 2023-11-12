@@ -32,7 +32,7 @@ const Select = ({ title, value, children }: SelectProps) => {
                 </div>
             </div>
 
-            <ul className="w-full max-h-[290px] absolute bg-white top-17 left-0 border-x border-b border-gray-light overflow-y-auto">
+            <ul className="w-full max-h-[290px] absolute bg-white top-17 left-0 z-10 border-x border-b border-gray-light overflow-y-auto">
                 {isOpen && children}
             </ul>
         </div>

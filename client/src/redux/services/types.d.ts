@@ -82,3 +82,18 @@ export type SearchTransactionsRequest = {
     type: CategoryType | "all",
     category: string | "all"
 };
+
+/* -------------------- */
+/*     STATISCTICS      */
+/* -------------------- */
+
+export type Statistic = {
+    period: number | string,
+    sum: number
+};
+
+export type GetEvolutionRequest = {
+    type: CategoryType | "all",
+    periodType: "yearly" | "monthly",
+    category: string
+};

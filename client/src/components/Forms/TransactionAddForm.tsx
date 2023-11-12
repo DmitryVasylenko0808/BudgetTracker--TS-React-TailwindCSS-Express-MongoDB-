@@ -84,7 +84,13 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
                 <div className="flex-1">
                     <Select title="Category" value={category.title}>
                         {currentCategories?.map(c =>
-                            <SelectItem onClick={() => handleClickCategory(c)} value="Income">{c.title}</SelectItem>
+                            <SelectItem 
+                                onClick={() => handleClickCategory(c)} 
+                                value="Income" 
+                                key={c._id}
+                            >
+                                {c.title}
+                            </SelectItem>
                         )}
                     </Select>
                 </div>
