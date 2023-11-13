@@ -1,6 +1,7 @@
 import React from "react";
 import { Transaction } from "../../redux/services/types";
 import TransactionsTableItem from "./TransactionTableItem";
+import CheckBox from "../CheckBox";
 
 type TransactionsTableProps = {
     transactions: Transaction[],
@@ -11,19 +12,13 @@ type TransactionsTableProps = {
 }
 
 const TransactionsTable = ({ transactions, selectedTransactions, isSelectedAll, onSelectAll, onSelectItem }: TransactionsTableProps) => {
-    
 
     return (
         <table className="w-full border border-gray-light shadow-xl">
             <thead className="border-b border-gray-light">
                 <tr className="flex font-bold text-center">
                     <td className="px-4 py-2 border-x border-gray-light">
-                        <input
-                            onChange={(e) => onSelectAll(e)}
-                            checked={isSelectedAll}
-                            type="checkbox"
-                            aria-label="check"
-                        />
+                        <CheckBox isChecked={isSelectedAll} onChange={onSelectAll} />
                     </td>
                     <td className="px-4 py-2 border-x border-gray-light w-[160px]">Date</td>
                     <td className="px-4 py-2 border-x border-gray-light flex-auto">Description</td>

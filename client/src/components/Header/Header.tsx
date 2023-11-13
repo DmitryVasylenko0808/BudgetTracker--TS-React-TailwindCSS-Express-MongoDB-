@@ -12,7 +12,7 @@ const Header = () => {
     const handleLogOutClick = () => dispatch(logOut());
 
     return (
-        <header className="sticky top-0 z-20 py-6 bg-navy-light shadow-md">
+        <header className="sticky top-0 z-20 bg-navy-light shadow-md">
             <div className="max-w-[1440px] mx-auto px-5">
                 <div className="flex items-center">
                     <a className="flex items-center gap-x-3 text-white" href="#">
@@ -27,7 +27,7 @@ const Header = () => {
                                 <HiUser size={30} />
                                 <span className="text-lg tracking-wide">{login}</span>
                             </div>
-                            <button onClick={handleLogOutClick} className="w-[145px] px-4 py-2 text-white flex items-center gap-x-2 hover:bg-navy-normal">
+                            <button onClick={handleLogOutClick} className="w-[145px] px-4 py-6 text-white flex items-center gap-x-2 hover:bg-navy-normal">
                                 <HiLogout size={30} />
                                 <span className="text-lg tracking-wide">Log Out</span>
                             </button>

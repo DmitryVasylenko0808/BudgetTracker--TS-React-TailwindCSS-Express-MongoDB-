@@ -104,7 +104,7 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
                     onSelectAll={handleSelectAllTransactions}
                     onSelectItem={handleSelectTransaction}
                   />
-                : <div className="">No data</div>
+                : <h3 className="text-center text-gray-strength font-bold">No data</h3>
             }
 
             <Modal isOpen={isOpenAdd} onClose={handeCloseAddModal}>

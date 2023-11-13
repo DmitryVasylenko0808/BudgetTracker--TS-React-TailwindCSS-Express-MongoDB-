@@ -15,3 +15,11 @@ body {
 
     box-sizing: border-box;
 }
+
+.navlink {
+    @apply block px-4 py-7 hover:bg-navy-normal;
+}
+
+.navlink.active {
+    @apply bg-navy-normal;
+}
