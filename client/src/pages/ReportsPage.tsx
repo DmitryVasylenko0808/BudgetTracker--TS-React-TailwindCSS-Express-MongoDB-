@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useGetReportsQuery } from "../redux/services/staticticsApi";
 import { useSearchParams } from "react-router-dom";
-import { CategoryType, ReportCategory } from "../redux/services/types";
+import { CategoryType } from "../redux/services/types";
 import ReportsFilter from "../components/Reports/ReportsFilter";
 import ReportsTable from "../components/Reports/ReportsTable";
 
