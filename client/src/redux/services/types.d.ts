@@ -8,6 +8,8 @@ export type User = {
     sum: number
 };
 
+export type LoginResponse = User & { token: string };
+
 export type RegisterRequest = {
     login: string,
     password: string,
@@ -18,8 +20,6 @@ export type LoginRequest = {
     login: string,
     password: string,
 };
-
-export type LoginResponse = User & { token: string };
 
 /* ------------------ */
 /*     CATEGORIES     */
@@ -87,9 +87,24 @@ export type SearchTransactionsRequest = {
 /*     STATISCTICS      */
 /* -------------------- */
 
+export type MonthReport = {
+    month: string | number,
+    sum: string | number
+};
+
+export type ReportCategory = {
+    category: string,
+    report: MonthReport[]
+};
+
 export type Statistic = {
     period: number | string,
     sum: number
+};
+
+export type GetReportsRequest = {
+    year: string | number,
+    type: CategoryType
 };
 
 export type GetEvolutionRequest = {

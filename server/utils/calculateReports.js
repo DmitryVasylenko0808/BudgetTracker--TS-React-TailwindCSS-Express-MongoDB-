@@ -9,10 +9,16 @@ const calculateReports = (categories, transactions) => {
                 .toFixed(2);
 
 
-            reportByOneMonth = { [month]: reportByOneMonth }
+            reportByOneMonth = {
+                month,
+                sum: reportByOneMonth 
+            }
             reportsByMonths.push(reportByOneMonth);
         }
-        reportByCategory = { [category.title]: reportsByMonths };
+        reportByCategory = {
+            category: category.title, 
+            report: reportsByMonths 
+        };
         result.push(reportByCategory);
     }
 
