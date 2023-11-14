@@ -1,4 +1,5 @@
 import React from "react";
+import { HiArrowNarrowDown, HiArrowNarrowUp } from "react-icons/hi";
 import { Transaction } from "../../redux/services/types";
 import { formatDate } from "../../utils/formatDate"; //
 import CheckBox from "../CheckBox";
@@ -21,7 +22,13 @@ const TransactionsTableItem = ({ isSelected, transaction, onSelect }: Transactio
             <td className="px-4 py-2 border-x border-gray-light w-[160px]">{formatDate(transaction.date as Date)}</td>
             <td className="px-4 py-2 border-x border-gray-light flex-auto">{transaction.description}</td>
             <td className="px-4 py-2 border-x border-gray-light w-[150px]">{transaction.category?.title}</td>
-            <td className="px-4 py-2 border-x border-gray-light w-[130px]">{transaction.type}</td>
+            <td className="px-4 py-2 border-x border-gray-light w-[130px] flex items-center gap-x-1">
+                {transaction.type === "Income" 
+                    ? <HiArrowNarrowUp size={20} color="#82ca9d" /> 
+                    : <HiArrowNarrowDown size={20} color="#f87171" />
+                } 
+                {transaction.type}
+            </td>
             <td className="px-4 py-2 border-x border-gray-light w-[170px]">{transaction.sum.toFixed(2)}</td>
         </tr>
     );

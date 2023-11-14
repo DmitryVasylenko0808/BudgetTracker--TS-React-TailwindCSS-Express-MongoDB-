@@ -102,6 +102,11 @@ export type Statistic = {
     sum: number
 };
 
+export type StatisticData = {
+    incomes: Statistic[],
+    outcomes: Statistic[]
+};
+
 export type GetReportsRequest = {
     year: string | number,
     type: CategoryType

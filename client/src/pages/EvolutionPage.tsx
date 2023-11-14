@@ -5,13 +5,8 @@ import EvolutionChart from "../components/Evolution/EvolutionChart";
 import Select from "../components/Select";
 import SelectItem from "../components/SelectItem";
 import { useGetCategoriesQuery } from "../redux/services/categoriesApi";
-import { Statistic } from "../redux/services/types";
+import { Statistic, StatisticData } from "../redux/services/types";
 import EvolutionFilter from "../components/Evolution/EvolutionFIlter";
-
-type StatisticData = {
-    incomes: Statistic[],
-    outcomes: Statistic[]
-};
 
 const EvolutionPage = () => {
     const [hiddenEmpty, setIsHiddenEmpty] = useState<boolean>(false);

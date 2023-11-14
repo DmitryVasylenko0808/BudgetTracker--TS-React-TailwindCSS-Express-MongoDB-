@@ -21,7 +21,7 @@ export const authApi = empltySplitApi.injectEndpoints({
                 method: "POST",
                 body
             }),
-            invalidatesTags: ["User"]
+            invalidatesTags: ["User", "Categories", "Transactions"]
         })
     })
 });

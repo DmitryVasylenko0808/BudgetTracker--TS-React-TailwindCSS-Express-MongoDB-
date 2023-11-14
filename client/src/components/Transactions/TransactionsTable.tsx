@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Transaction } from "../../redux/services/types";
 import TransactionsTableItem from "./TransactionTableItem";
 import CheckBox from "../CheckBox";
@@ -11,8 +11,7 @@ type TransactionsTableProps = {
     onSelectItem: (id: string) => void
 }
 
-const TransactionsTable = ({ transactions, selectedTransactions, isSelectedAll, onSelectAll, onSelectItem }: TransactionsTableProps) => {
-
+const TransactionsTable = ({ transactions, selectedTransactions, isSelectedAll, onSelectAll, onSelectItem }: TransactionsTableProps) => {  
     return (
         <table className="w-full border border-gray-light shadow-xl">
             <thead className="border-b border-gray-light">
