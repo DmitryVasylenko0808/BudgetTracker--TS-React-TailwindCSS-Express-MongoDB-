@@ -21,7 +21,7 @@ class CategoriesController {
             const { title, type } = req.body;
             const formatTitle = formatTitleCategory(title);
 
-            const category = await CategoryModel.findOne({ title: formatTitle });
+            const category = await CategoryModel.findOne({ title: formatTitle, user: req.userId });
             if (category) {
                 return res.status(400).json({
                     path: "title",

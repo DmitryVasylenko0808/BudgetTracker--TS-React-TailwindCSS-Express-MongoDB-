@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useAddCategoryMutation, useGetCategoriesQuery } from "../../redux/services/categoriesApi";
+import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
 import TextField from "../TextField";
 import Select from "../Select";
 import SelectItem from "../SelectItem";
@@ -82,7 +82,7 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
                     </Select>
                 </div>
                 <div className="flex-1">
-                    <Select title="Category" value={category.title}>
+                    <Select title="Category" value={category?.title}>
                         {currentCategories?.map(c =>
                             <SelectItem 
                                 onClick={() => handleClickCategory(c)} 
