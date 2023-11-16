@@ -6,6 +6,16 @@ import SelectItem from "../SelectItem";
 import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
 import { useSearchParams } from "react-router-dom";
 import { CategoryType } from "../../redux/services/types";
+import { AnimatePresence, motion } from "framer-motion";
+
+const variants = {
+    visible: {
+        opacity: 1
+    },
+    hidden: {
+        opacity: 0
+    }
+}
 
 const TransactionFilter = () => {
     const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -31,7 +41,7 @@ const TransactionFilter = () => {
             month: searchParams.get("month") as string,
             type: searchParams.get("type") as string,
             category
-        }) //
+        }) 
     }
 
     const handleToggle = () => setIsOpen(!isOpen);
@@ -53,44 +63,53 @@ const TransactionFilter = () => {
                 }
             </button>
 
-            {isOpen &&
-                <div className="py-2 px-4 absolute top-10 right-0 z-10 bg-white border border-gray-light shadow-xl">
-                    <div className="mb-4 flex justify-between items-center">
-                        <span className="font-bold">Filter</span>
-                        <button
-                            onClick={handleClose}
-                            className="text-gray-strength hover:text-black"
-                            aria-label="close"
-                        >
-                            <HiOutlineX size={30} />
-                        </button>
-                    </div>
+            <AnimatePresence>
+                {isOpen &&
+                    <motion.div 
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        variants={variants}
+                        transition={{ duration: 0.15 }}
+                        className="py-2 px-4 absolute top-10 right-0 z-10 bg-white border border-gray-light shadow-xl"
+                    >
+                        <div className="mb-4 flex justify-between items-center">
+                            <span className="font-bold">Filter</span>
+                            <button
+                                onClick={handleClose}
+                                className="text-gray-strength hover:text-black"
+                                aria-label="close"
+                            >
+                                <HiOutlineX size={30} />
+                            </button>
+                        </div>
 
-                    <div className="w-[360px] flex gap-x-8">
-                        <div className="flex-1">
-                            <Select title="Type" value={type}>
-                                <SelectItem onClick={() => handleSelectType("all")} value="All">All</SelectItem>
-                                <SelectItem onClick={() => handleSelectType("Income")} value="Income">Income</SelectItem>
-                                <SelectItem onClick={() => handleSelectType("Outcome")} value="Outcome">Outcome</SelectItem>
-                            </Select>
+                        <div className="w-[360px] flex gap-x-8">
+                            <div className="flex-1">
+                                <Select title="Type" value={type}>
+                                    <SelectItem onClick={() => handleSelectType("all")} value="All">All</SelectItem>
+                                    <SelectItem onClick={() => handleSelectType("Income")} value="Income">Income</SelectItem>
+                                    <SelectItem onClick={() => handleSelectType("Outcome")} value="Outcome">Outcome</SelectItem>
+                                </Select>
+                            </div>
+                            <div className="flex-1">
+                                <Select title="Category" value={category}>
+                                    <SelectItem onClick={() => handleSelectCategory("all")} value="All">All</SelectItem>
+                                    {categories?.map(c => 
+                                        <SelectItem 
+                                            onClick={() => handleSelectCategory(c.title)} 
+                                            value={c.title} 
+                                            key={c._id}
+                                        >
+                                            {c.title}
+                                        </SelectItem>
+                                    )}
+                                </Select>
+                            </div>
                         </div>
-                        <div className="flex-1">
-                            <Select title="Category" value={category}>
-                                <SelectItem onClick={() => handleSelectCategory("all")} value="All">All</SelectItem>
-                                {categories?.map(c => 
-                                    <SelectItem 
-                                        onClick={() => handleSelectCategory(c.title)} 
-                                        value={c.title} 
-                                        key={c._id}
-                                    >
-                                        {c.title}
-                                    </SelectItem>
-                                )}
-                            </Select>
-                        </div>
-                    </div>
-                </div>
-            }
+                    </motion.div>
+                }
+            </AnimatePresence>
         </div>
     );
 }

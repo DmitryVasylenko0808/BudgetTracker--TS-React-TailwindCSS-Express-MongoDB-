@@ -16,8 +16,14 @@ const SearchBar = () => {
 
     return (
         <label className="px-4 py-2 bg-navy-normal rounded-lg flex items-center gap-x-2 text-lg text-white cursor-text" htmlFor="text">
-            <HiOutlineSearch size={30} onClick={handleSearch} />
-            <input onChange={handleChange} className="max-w-[160px] bg-transparent outline-0" placeholder="Search..." id="text"></input>
+            <HiOutlineSearch size={30} onClick={handleSearch} className="cursor-pointer" />
+            <input 
+                onChange={handleChange} 
+                className="max-w-[160px] bg-transparent outline-0" 
+                placeholder="Search..." 
+                id="text"
+            >
+            </input>
         </label>
     );
 }

@@ -5,7 +5,7 @@ import { Navigate, Outlet } from "react-router";
 const RequireAuth = () => {
     const { isAuthorized } = useAuth();
 
-    return isAuthorized ? <Outlet /> : <Navigate to="/auth/login" />;
+    return isAuthorized ? <Outlet /> : <Navigate to="/auth/login" replace />;
 }
 
 export default RequireAuth;
