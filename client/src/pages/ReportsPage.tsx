@@ -5,6 +5,7 @@ import { CategoryType } from "../redux/services/types";
 import ReportsFilter from "../components/Reports/ReportsFilter";
 import ReportsTable from "../components/Reports/ReportsTable";
 import { useDate } from "../hooks/date";
+import Loader from "../components/Loader";
 
 const ReportsPage = () => {
     const { minYear } = useDate();
@@ -28,7 +29,7 @@ const ReportsPage = () => {
     }
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <Loader variant="primary" />
     }
 
     return (

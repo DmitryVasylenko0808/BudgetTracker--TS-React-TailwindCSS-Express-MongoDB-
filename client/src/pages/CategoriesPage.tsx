@@ -8,6 +8,7 @@ import RenameCategoryForm from "../components/Forms/RenameCategoryForm";
 import Select from "../components/Select";
 import SelectItem from "../components/SelectItem";
 import { Category, CategoryType } from "../redux/services/types";
+import Loader from "../components/Loader";
 
 const CategoriesPage = () => {
     const [typeFilter, setTypeFilter] = useState<CategoryType>("Outcome");
@@ -52,7 +53,7 @@ const CategoriesPage = () => {
 
 
     if (isCategoriesLoading) {
-        return <div>Loading...</div>;
+        return <Loader variant="primary" />;
     }
 
     return (

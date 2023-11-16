@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useAddCategoryMutation, useRenameCategoryMutation } from "../../redux/services/categoriesApi";
 import TextField from "../TextField";
 import { Category } from "../../redux/services/types";
+import Loader from "../Loader";
 
 type RenameCategoryFormProps = {
     category: Category,
@@ -42,10 +43,12 @@ const RenameCategoryForm = ({ category, onCloseModal }: RenameCategoryFormProps)
             />
             <button
                 type="submit"
-                className="py-3 bg-navy-light shadow-xl text-lg text-white font-bold tracking-wide hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
+                className="h-[52px] flex justify-center items-center bg-navy-light shadow-xl 
+                text-lg text-white font-bold tracking-wide 
+                hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
                 disabled={isLoading}
             >
-                {isLoading ? "Processing..." : "Rename Category"}
+                {isLoading ? <Loader variant="secondary" /> : "Rename Category"}
             </button>
         </form>
     );

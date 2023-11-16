@@ -4,6 +4,7 @@ import TextField from "../TextField";
 import Select from "../Select";
 import SelectItem from "../SelectItem";
 import { CategoryType } from "../../redux/services/types";
+import Loader from "../Loader";
 
 type AddCategoryFormProps = {
     onCloseModal?: () => void
@@ -51,10 +52,12 @@ const AddCategoryForm = ({ onCloseModal }: AddCategoryFormProps) => {
 
             <button
                 type="submit"
-                className="py-3 bg-navy-light shadow-xl text-lg text-white font-bold tracking-wide hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
+                className="h-[52px] flex justify-center items-center bg-navy-light shadow-xl 
+                text-lg text-white font-bold tracking-wide 
+                hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
                 disabled={isLoading}
             >
-                {isLoading ? "Processing..." : "Add Category"}
+                {isLoading ? <Loader variant="secondary" /> : "Add Category"}
             </button>
         </form>
     );

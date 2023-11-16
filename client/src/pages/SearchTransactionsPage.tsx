@@ -4,6 +4,7 @@ import { useSearchTransactionsQuery } from "../redux/services/transactionApi";
 import TransactionsContainer from "../components/Transactions/TransactionsContainer";
 import { useSearchParams } from "react-router-dom";
 import { CategoryType } from "../redux/services/types";
+import Loader from "../components/Loader";
 
 const SearchTransactionsPage = () => {
     const { value } = useParams();
@@ -21,7 +22,7 @@ const SearchTransactionsPage = () => {
     }, [type, category]);
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <Loader variant="primary" />
     }
 
     return (

@@ -6,6 +6,7 @@ import SelectItem from "../SelectItem";
 import { Category, CategoryType } from "../../redux/services/types";
 import DatePicker from "../DatePicker";
 import { useAddTransactionMutation } from "../../redux/services/transactionApi";
+import Loader from "../Loader";
 
 type AddCategoryFormProps = {
     onCloseModal?: () => void
@@ -104,11 +105,12 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
 
             <button
                 type="submit"
-                className="py-3 bg-navy-light shadow-xl text-lg text-white font-bold tracking-wide 
+                className="h-[52px] flex justify-center items-center bg-navy-light shadow-xl 
+                text-lg text-white font-bold tracking-wide 
                 hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
                 disabled={isLoading}
             >
-                {isLoading ? "Proccesing..." : "Add Transaction"}
+                {isLoading ? <Loader variant="secondary" /> : "Add Transaction"}
             </button>
         </form>
     );

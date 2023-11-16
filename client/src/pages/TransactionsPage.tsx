@@ -7,6 +7,7 @@ import MonthSelect from "../components/Transactions/MonthSelect";
 import TransactionsContainer from "../components/Transactions/TransactionsContainer";
 import { useGetTransactionQuery } from "../redux/services/transactionApi";
 import { useDate } from "../hooks/date";
+import Loader from "../components/Loader";
 
 const TransactionsPage = () => {
     const defaultMonth = 1;
@@ -56,7 +57,7 @@ const TransactionsPage = () => {
     };
 
     if (isLoading) {
-        return <div>Loading...</div>
+        return <Loader variant="primary" />
     }
 
     return (

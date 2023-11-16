@@ -4,6 +4,7 @@ import { useNavigate } from "react-router";
 import TextField from "../TextField";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUserInfo } from "../../redux/slices/authSlice";
+import Loader from "../Loader";
 
 type LoginFormFields = {
     login: { value: string },
@@ -54,10 +55,12 @@ const LoginForm = () => {
             <span className="min-h-[14px] text-center text-sm text-red-600">{error && error.path === "" && error.message}</span>
             <button
                 type="submit"
-                className="py-3 bg-navy-light shadow-xl text-xl text-white font-bold tracking-wide hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
+                className="h-[52px] flex justify-center items-center bg-navy-light shadow-xl 
+                text-xl text-white font-bold tracking-wide 
+                hover:bg-navy-normal disabled:opacity-60 disabled:hover:bg-navy-light"
                 disabled={isLoading}
             >
-                {isLoading ? "Processing..." : "Sign In"}
+                {isLoading ? <Loader variant="secondary" /> : "Sign In"}
             </button>
         </form>
     );

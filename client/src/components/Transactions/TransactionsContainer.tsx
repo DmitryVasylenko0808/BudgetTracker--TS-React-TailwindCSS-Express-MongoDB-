@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { CategoryType, Transaction } from "../../redux/services/types";
-import { useDeleteTransactionsMutation, useGetTransactionQuery } from "../../redux/services/transactionApi";
+import { Transaction } from "../../redux/services/types";
+import { useDeleteTransactionsMutation } from "../../redux/services/transactionApi";
 import TransactionsMenu from "./TransactionsMenu";
 import Modal from "../Modal";
 import AddTransactionForm from "../Forms/TransactionAddForm";

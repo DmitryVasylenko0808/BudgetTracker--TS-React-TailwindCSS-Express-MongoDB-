@@ -2,7 +2,7 @@ import React from "react";
 
 type CheckBoxProps = {
     isChecked: boolean,
-    onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+    onChange: (() => void) | ((e: React.ChangeEvent<HTMLInputElement>) => void)
 };
 
 const CheckBox = ({ isChecked, onChange }: CheckBoxProps) => {
@@ -11,7 +11,7 @@ const CheckBox = ({ isChecked, onChange }: CheckBoxProps) => {
     return (
         <label className="relative block">
             <input
-                onChange={(e) => onChange(e)}
+                onChange={onChange}
                 checked={isChecked}
                 type="checkbox"
                 aria-label="check"

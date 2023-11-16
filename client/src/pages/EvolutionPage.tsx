@@ -5,6 +5,7 @@ import EvolutionChart from "../components/Evolution/EvolutionChart";
 import { useGetCategoriesQuery } from "../redux/services/categoriesApi";
 import { StatisticData } from "../redux/services/types";
 import EvolutionFilter from "../components/Evolution/EvolutionFIlter";
+import Loader from "../components/Loader";
 
 const EvolutionPage = () => {
     const [hiddenEmpty, setIsHiddenEmpty] = useState<boolean>(false);
@@ -58,7 +59,7 @@ const EvolutionPage = () => {
     const isExistOutcomes = data && data.outcomes.length && data.outcomes.some(s => s.sum !== 0);
 
     if (isLoadingOutcomes || isLoadingIncomes) {
-        <div className="">Loading...</div>
+        return <Loader variant="primary" />
     }
 
     return (
