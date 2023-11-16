@@ -1,5 +1,6 @@
 import React from "react";
 import { useSearchParams } from "react-router-dom";
+import { useDate } from "../../hooks/date";
 
 type MonthSelectProps = {
     selectedMonth: number,
@@ -7,19 +8,10 @@ type MonthSelectProps = {
 }
 
 const MonthSelect = ({ selectedMonth, onSelect }: MonthSelectProps) => {
-    const months = [
-        "JAN", "FEB", "MAR",
-        "APR", "MAY", "JUN",
-        "JUL", "AUG", "SEP",
-        "OCT", "NOV", "DEC"
-    ];
+    const { shortMonths: months } = useDate(); 
 
     const monthClassName = "flex-1 h-min border border-gray-light text-center hover:bg-navy-light/20 hover:text-navy-normal";
     const activeMonthClassName = `${monthClassName} bg-navy-light/20 text-navy-normal`;
-
-    const [searchParams] = useSearchParams();
-
-    console.log(searchParams.get("year"));
 
     return (
         <div className="w-[1000px]">

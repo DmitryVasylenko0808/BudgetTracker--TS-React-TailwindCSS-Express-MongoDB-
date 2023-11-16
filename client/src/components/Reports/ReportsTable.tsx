@@ -1,3 +1,4 @@
+import { useDate } from "../../hooks/date";
 import { ReportCategory } from "../../redux/services/types";
 
 type ReportsTableProps = {
@@ -5,12 +6,7 @@ type ReportsTableProps = {
 };
 
 const ReportsTable = ({ data = [] }: ReportsTableProps) => {
-    const months = [
-        "January", "February", "March",
-        "April", "May", "June",
-        "July", "August", "September",
-        "October", "November", "December"
-    ]; //
+    const { fullMonths: months } = useDate();
 
     return (
         <table className="w-full border border-gray-light shadow-xl">

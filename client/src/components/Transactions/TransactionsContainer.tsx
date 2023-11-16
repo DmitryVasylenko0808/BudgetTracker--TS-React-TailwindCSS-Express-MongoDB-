@@ -8,6 +8,7 @@ import AddTransactionForm from "../Forms/TransactionAddForm";
 import EditTransactionForm from "../Forms/EditTransactionForm";
 import TransactionsTable from "./TransactionsTable";
 import TransactionsTotal from "./TransactionsTotal";
+import { useDate } from "../../hooks/date";
 
 type TransactionsContainerProps = {
     data: Transaction[],
@@ -19,17 +20,12 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
     const [isEditOpen, setIsOpenEdit] = useState<boolean>(false);
     const [selectedTransactions, setSelectedTransactions] = useState<Transaction[]>([]);
     const [searchParams] = useSearchParams();
+    const { fullMonths } = useDate();
 
     const year = searchParams.get("year") as string;
     const month = searchParams.get("month") as string;
-
-    const months = [
-        "January", "February", "March",
-        "April", "May", "June",
-        "July", "August", "September",
-        "October", "November", "December"
-    ]; 
-    const fullMonth = months[parseFloat(month) - 1]; //
+    
+    const fullMonth = fullMonths[parseFloat(month) - 1]; //
 
     const [deleteTransactions] = useDeleteTransactionsMutation();
 

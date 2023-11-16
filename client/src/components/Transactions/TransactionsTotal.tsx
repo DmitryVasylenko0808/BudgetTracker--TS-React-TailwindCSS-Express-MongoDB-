@@ -20,8 +20,8 @@ const TransactionsTotal = ({ transactions }: TransactionsTotalProps) => {
         return result;
     };
 
-    const totalIncomes = getTotalSum("Income", transactions);
-    const totalOutcomes = getTotalSum("Outcome", transactions);
+    const totalIncomes = getTotalSum("Income", transactions); //
+    const totalOutcomes = getTotalSum("Outcome", transactions); //
     const totalResult = (parseFloat(totalIncomes) - parseFloat(totalOutcomes)).toFixed(2);
 
     return (

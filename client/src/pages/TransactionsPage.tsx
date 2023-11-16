@@ -6,15 +6,10 @@ import SelectItem from "../components/SelectItem";
 import MonthSelect from "../components/Transactions/MonthSelect";
 import TransactionsContainer from "../components/Transactions/TransactionsContainer";
 import { useGetTransactionQuery } from "../redux/services/transactionApi";
+import { useDate } from "../hooks/date";
 
 const TransactionsPage = () => {
-    const minYear = 2020;
-    const maxYear = new Date().getFullYear();
-
-    let years: number[] = [];
-    for (let i = minYear; i <= maxYear; i++) {
-        years.push(i);
-    }; //
+    const { years } = useDate();
 
     const [searchParams, setSearchParams] = useSearchParams();
 

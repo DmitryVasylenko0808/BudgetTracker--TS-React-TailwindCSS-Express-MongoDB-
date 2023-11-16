@@ -1,3 +1,4 @@
+import { useDate } from "../../hooks/date";
 import { CategoryType } from "../../redux/services/types";
 import Select from "../Select";
 import SelectItem from "../SelectItem";
@@ -10,13 +11,7 @@ type ReportsFilterProps = {
 };
 
 const ReportsFilter = ({ currentYear, currentType, onSelectYear, onSelectType }: ReportsFilterProps) => {
-    const minYear = 2020;
-    const maxYear = new Date().getFullYear();
-
-    let years: number[] = [];
-    for (let i = minYear; i <= maxYear; i++) {
-        years.push(i);
-    }; //
+    const { years } = useDate();
 
     return (
         <div className="mb-10 flex gap-x-8">
