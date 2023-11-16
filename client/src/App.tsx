@@ -12,12 +12,11 @@ import RequireAuth from './pages/RequireAuth';
 import { useGetInfoUserQuery } from './redux/services/authApi';
 import { useAppDispatch, useAppSelect } from './redux/hooks';
 import { setUserInfo } from './redux/slices/authSlice';
-import { useAuth } from '.';
+import { useAuth } from './hooks/auth';
 import SearchTransactionsPage from './pages/SearchTransactionsPage';
 
 const App = () => {
-  const { isAuthorized, token } = useAuth();
-  const user = useAppSelect(state => state.auth);
+  const { token } = useAuth();
   const dispatch = useAppDispatch();
 
   const { data: authData } = useGetInfoUserQuery(null);
@@ -26,7 +25,7 @@ const App = () => {
     if (authData) {
       dispatch(setUserInfo({ 
         ...authData, 
-        token: localStorage.getItem("token") 
+        token 
       }));
     }
   }, [authData]);

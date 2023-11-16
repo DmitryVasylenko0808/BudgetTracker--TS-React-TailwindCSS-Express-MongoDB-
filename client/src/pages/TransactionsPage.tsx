@@ -9,29 +9,26 @@ import { useGetTransactionQuery } from "../redux/services/transactionApi";
 import { useDate } from "../hooks/date";
 
 const TransactionsPage = () => {
+    const defaultMonth = 1;
+
     const { years } = useDate();
 
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const year = searchParams.get("year") as string;
-    const month = searchParams.get("month") as string;
-    const type: CategoryType | "all" = searchParams.get("type") as CategoryType | "all";
-    const category: string | "all" = searchParams.get("category") as string | "all";
+    const year = searchParams.get("year") as string || years[0].toString();
+    const month = searchParams.get("month") as string || defaultMonth.toString();
+    const type: CategoryType | "all" = searchParams.get("type") as CategoryType | "all" || "all";
+    const category: string | "all" = searchParams.get("category") as string | "all" || "all";
 
     const { data, isLoading } = useGetTransactionQuery({ year, month, type, category });
 
     useEffect(() => {
-        const defaultMonth = 1;
-
         setSearchParams(
             { 
-                year: years[0].toString(), 
-                month: defaultMonth.toString(),
-                type: "all",
-                category: "all" 
+                year, month, type, category 
             },
             { replace: true }
-        ); //
+        ); 
     }, []);
 
     const handleSelectYear = (year: number) => {
@@ -43,7 +40,7 @@ const TransactionsPage = () => {
                 category: searchParams.get("category") as string 
             },
             { replace: true }
-        ); //
+        ); 
     };
 
     const handleSelectMonth = (month: string) => {
@@ -55,7 +52,7 @@ const TransactionsPage = () => {
                 category: searchParams.get("category") as string 
             },
             { replace: true }
-        ); //
+        ); 
     };
 
     if (isLoading) {

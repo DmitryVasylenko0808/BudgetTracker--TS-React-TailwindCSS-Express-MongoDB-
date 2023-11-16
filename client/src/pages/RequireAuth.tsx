@@ -1,5 +1,5 @@
 import React from "react";
-import { useAuth } from "..";
+import { useAuth } from "../hooks/auth";
 import { Navigate, Outlet } from "react-router";
 
 const RequireAuth = () => {

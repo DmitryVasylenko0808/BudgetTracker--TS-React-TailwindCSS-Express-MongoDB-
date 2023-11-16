@@ -2,10 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useGetEvolutionQuery } from "../redux/services/staticticsApi";
 import { useSearchParams } from "react-router-dom";
 import EvolutionChart from "../components/Evolution/EvolutionChart";
-import Select from "../components/Select";
-import SelectItem from "../components/SelectItem";
 import { useGetCategoriesQuery } from "../redux/services/categoriesApi";
-import { Statistic, StatisticData } from "../redux/services/types";
+import { StatisticData } from "../redux/services/types";
 import EvolutionFilter from "../components/Evolution/EvolutionFIlter";
 
 const EvolutionPage = () => {
@@ -13,8 +11,8 @@ const EvolutionPage = () => {
     const [data, setData] = useState<StatisticData | null>(null);
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const periodType = searchParams.get("periodType") as "yearly" | "monthly";
-    const category = searchParams.get("category") as string;
+    const periodType = searchParams.get("periodType") as "yearly" | "monthly" || "monthly";
+    const category = searchParams.get("category") as string || "all";
 
     const { data: categories } = useGetCategoriesQuery();
     const { data: outcomes, isLoading: isLoadingOutcomes } = useGetEvolutionQuery({ type: "Outcome", periodType, category });
@@ -22,10 +20,7 @@ const EvolutionPage = () => {
 
     useEffect(() => {
         setSearchParams(
-            {
-                periodType: "monthly",
-                category: "all"  
-            },
+            { periodType, category },
             { replace: true }
         );
     }, []);

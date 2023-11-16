@@ -9,19 +9,16 @@ const SearchTransactionsPage = () => {
     const { value } = useParams();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const type: CategoryType | "all" = searchParams.get("type") ? searchParams.get("type") as CategoryType | "all" : "all"; //
-    const category: string = searchParams.get("category") ? searchParams.get("category") as string : "all"; //
+    const type: CategoryType | "all" = searchParams.get("type") as CategoryType | "all" || "all"; 
+    const category: string = searchParams.get("category") as string || "all"; 
 
     const { data, isLoading } = useSearchTransactionsQuery({ value, type, category });
 
     useEffect(() => {
         if (data) {
-            setSearchParams({
-                type: "all",
-                category: "all"
-            });
+            setSearchParams({ type, category });
         }
-    }, [])
+    }, [type, category]);
 
     if (isLoading) {
         return <div>Loading...</div>

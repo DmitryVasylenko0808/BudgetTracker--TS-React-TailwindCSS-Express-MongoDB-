@@ -4,12 +4,18 @@ import NavBar from "./NavBar";
 import SearchBar from "./SearchBar";
 import { useAppDispatch, useAppSelect } from "../../redux/hooks";
 import { logOut } from "../../redux/slices/authSlice";
+import { useNavigate } from "react-router";
 
 const Header = () => {
+    const navigate = useNavigate();
+
     const dispatch = useAppDispatch();
     const { login } = useAppSelect(state => state.auth); 
 
-    const handleLogOutClick = () => dispatch(logOut());
+    const handleLogOutClick = () => {
+        dispatch(logOut());
+        navigate("/auth/login");
+    };
 
     return (
         <header className="sticky top-0 z-20 bg-navy-light shadow-md">

@@ -7,14 +7,6 @@ import { Provider } from 'react-redux';
 
 import { store } from "./redux/store";
 
-export const useAuth = () => {
-  const token = localStorage.getItem("token");
-
-  console.log(!!token);
-  
-  return { isAuthorized: !!token, token };
-};
-
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
