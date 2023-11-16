@@ -31,6 +31,7 @@ const Modal = ({ isOpen, children, onClose }: ModalProps) => {
                     initial="hidden"
                     animate="visible"
                     variants={variants}
+                    transition={{ duration: 0.15, type: "tween" }}
                     className="p-10 relative bg-white border border-gray-light shadow-xl"
                 >
                     <button onClick={onClose} className="absolute top-4 right-5 text-gray-strength hover:text-black" aria-label="close" >
