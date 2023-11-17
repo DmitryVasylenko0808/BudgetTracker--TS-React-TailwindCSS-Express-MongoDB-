@@ -30,7 +30,7 @@ const Header = () => {
                         <div className="w-[270px]">
                             <SearchBar />
                         </div>
-                        <div className="group relative">
+                        <div className="group relative cursor-pointer">
                             <div className="flex-auto text-white flex items-center gap-x-2">
                                 <HiUser size={30} />
                                 <span className="text-lg tracking-wide">{login}</span>

@@ -20,7 +20,7 @@ const ReportsTable = ({ data = [] }: ReportsTableProps) => {
             </thead>
             <tbody>
                 {data?.map((r, rIndex) => (
-                    <tr className="flex text-center border-y border-gray-light hover:bg-navy-light/20">
+                    <tr className="flex text-center border-y border-gray-light hover:bg-navy-light/20" key={rIndex}>
                         <td className="w-[160px] py-2 border-r" key={rIndex}>{r.category}</td>
                         {r.report.map((mr, i) => (
                             <td className="flex-1 px-2 py-2  even:bg-gray-light/50" key={i}>{mr.sum}</td>

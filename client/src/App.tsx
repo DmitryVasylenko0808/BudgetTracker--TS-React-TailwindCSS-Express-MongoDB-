@@ -1,20 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { lazy, useEffect } from 'react';
 import { Route, Routes } from 'react-router';
 import MainLayout from './layouts/MainLayout';
-import TransactionsPage from './pages/TransactionsPage';
-import CategoriesPage from './pages/CategoriesPage';
-import ReportsPage from './pages/ReportsPage';
-import EvolutionPage from './pages/EvolutionPage';
 import AuthLayout from './layouts/AuthLayout';
-import LoginPage from './pages/LoginPage';
-import RegisterPage from './pages/RegisterPage';
 import RequireAuth from './pages/RequireAuth';
 import { useGetInfoUserQuery } from './redux/services/authApi';
-import { useAppDispatch, useAppSelect } from './redux/hooks';
+import { useAppDispatch } from './redux/hooks';
 import { setUserInfo } from './redux/slices/authSlice';
 import { useAuth } from './hooks/auth';
-import SearchTransactionsPage from './pages/SearchTransactionsPage';
-import AddTransactionPage from './pages/AddTransactionPage';
+
+const TransactionsPage = lazy(() => import("./pages/TransactionsPage"));
+const AddTransactionPage = lazy(() => import("./pages/AddTransactionPage"));
+const CategoriesPage = lazy(() => import("./pages/CategoriesPage"));
+const ReportsPage = lazy(() => import("./pages/ReportsPage"));
+const EvolutionPage = lazy(() => import("./pages/EvolutionPage"));
+const SearchTransactionsPage = lazy(() => import("./pages/SearchTransactionsPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
 
 const App = () => {
   const { token } = useAuth();
