@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { useAddCategoryMutation, useRenameCategoryMutation } from "../../redux/services/categoriesApi";
+import React, { useState } from "react";
+import { useRenameCategoryMutation } from "../../redux/services/categoriesApi";
 import TextField from "../TextField";
 import { Category } from "../../redux/services/types";
 import Loader from "../Loader";

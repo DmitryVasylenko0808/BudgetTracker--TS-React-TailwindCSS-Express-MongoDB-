@@ -1,7 +1,5 @@
 import React from "react";
-import { HiPlus, HiPencil, HiOutlineTrash, HiFilter, HiOutlineX } from "react-icons/hi";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import { HiPencil, HiOutlineTrash } from "react-icons/hi";
 import TransactionFilter from "./TransactionsFilter";
 
 type TransactionsMenuProps = {

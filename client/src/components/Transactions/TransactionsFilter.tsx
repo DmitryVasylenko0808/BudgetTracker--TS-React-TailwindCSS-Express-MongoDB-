@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { HiFilter, HiOutlineX } from "react-icons/hi";
+import React, { useState } from "react";
+import { HiOutlineX } from "react-icons/hi";
 import { MdOutlineFilterAlt, MdOutlineFilterAltOff } from "react-icons/md";
 import Select from "../Select";
 import SelectItem from "../SelectItem";

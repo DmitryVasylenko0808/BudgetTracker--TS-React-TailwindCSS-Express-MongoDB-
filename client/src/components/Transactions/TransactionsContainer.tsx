@@ -4,7 +4,6 @@ import { Transaction } from "../../redux/services/types";
 import { useDeleteTransactionsMutation } from "../../redux/services/transactionApi";
 import TransactionsMenu from "./TransactionsMenu";
 import Modal from "../Modal";
-import AddTransactionForm from "../Forms/TransactionAddForm";
 import EditTransactionForm from "../Forms/EditTransactionForm";
 import TransactionsTable from "./TransactionsTable";
 import TransactionsTotal from "./TransactionsTotal";
