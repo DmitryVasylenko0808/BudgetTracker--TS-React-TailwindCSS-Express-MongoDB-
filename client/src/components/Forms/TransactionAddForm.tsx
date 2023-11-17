@@ -7,10 +7,9 @@ import { Category, CategoryType } from "../../redux/services/types";
 import DatePicker from "../DatePicker";
 import { useAddTransactionMutation } from "../../redux/services/transactionApi";
 import Loader from "../Loader";
+import SnackBar from "../SnackBar";
+import { AnimatePresence } from "framer-motion";
 
-type AddCategoryFormProps = {
-    onCloseModal?: () => void
-}
 
 type AddTransactionFormFields = {
     date: { value: string },
@@ -18,26 +17,33 @@ type AddTransactionFormFields = {
     sum: { value: number }
 }
 
-const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
+const AddTransactionForm = () => {
     const [error, setError] = useState<any>(null);
     const [type, setType] = useState<CategoryType>("Outcome");
     const [category, setCategory] = useState<Category>({} as Category);
     const [currentCategories, setCurrentCategories] = useState<Category[]>([]);
+    const [isShown, setIsShown] = useState<boolean>(false);
 
     const { data: categories } = useGetCategoriesQuery();
     const [addTransaction, { isLoading }] = useAddTransactionMutation();
+
+    let timeoutId: NodeJS.Timeout;
 
     useEffect(() => {
         if (categories) {
             setCurrentCategories(categories?.filter(c => c.type));
             setCategory(categories[0]);
         }
+
+        return () => {
+            clearTimeout(timeoutId);
+        }
     }, [categories]);
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
-        const target = e.target as typeof e.target & AddTransactionFormFields; 
+        const target = e.target as typeof e.target & AddTransactionFormFields;
         const data = {
             date: new Date(target.date.value),
             description: target.description.value,
@@ -45,9 +51,15 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
             category: category.title,
             sum: target.sum.value
         }
-        
+
         addTransaction(data).unwrap()
-            .then(() => { onCloseModal && onCloseModal() })
+            .then(() => { 
+                setIsShown(true);
+
+                timeoutId = setTimeout(() => {
+                    setIsShown(false);
+                }, 5000);
+             })
             .catch(err => setError(err.data));
     }
 
@@ -64,6 +76,11 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
     };
 
     const handleClickCategory = (category: Category) => setCategory(category);
+
+    const handleCloseSnackBar = (e: React.SyntheticEvent) => {
+        e.preventDefault();
+        setIsShown(false);
+    }
 
     return (
         <form onSubmit={handleSubmit} className="w-[400px] flex flex-col gap-y-4">
@@ -85,9 +102,9 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
                 <div className="flex-1">
                     <Select title="Category" value={category?.title}>
                         {currentCategories?.map(c =>
-                            <SelectItem 
-                                onClick={() => handleClickCategory(c)} 
-                                value="Income" 
+                            <SelectItem
+                                onClick={() => handleClickCategory(c)}
+                                value="Income"
                                 key={c._id}
                             >
                                 {c.title}
@@ -112,6 +129,14 @@ const AddTransactionForm = ({ onCloseModal }: AddCategoryFormProps) => {
             >
                 {isLoading ? <Loader variant="secondary" /> : "Add Transaction"}
             </button>
+
+            <AnimatePresence>
+                {isShown &&
+                    <SnackBar onClose={handleCloseSnackBar}>
+                        The transaction is added
+                    </SnackBar>
+                }
+            </AnimatePresence>
         </form>
     );
 }

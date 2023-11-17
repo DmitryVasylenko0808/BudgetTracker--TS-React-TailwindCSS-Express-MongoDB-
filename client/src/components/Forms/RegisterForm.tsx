@@ -3,6 +3,8 @@ import { useSignUpUserMutation } from "../../redux/services/authApi";
 import TextField from "../TextField";
 import SnackBar from "../SnackBar";
 import Loader from "../Loader";
+import { AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
 type RegisterFormFields = {
     login: { value: string },
@@ -11,10 +13,18 @@ type RegisterFormFields = {
 };
 
 const RegisterForm = () => {
+    let timeoutId: NodeJS.Timeout;
+
     const [error, setError] = useState<any>(null);
     const [isShown, setIsShown] = useState<boolean>(false);
 
     const [signUp, { isLoading }] = useSignUpUserMutation();
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(timeoutId);
+        }
+    }, []);
 
     const handleSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
@@ -30,7 +40,7 @@ const RegisterForm = () => {
             .then(() => {
                 setError(null);
                 setIsShown(true);
-                setTimeout(() => setIsShown(false), 5000);
+                timeoutId = setTimeout(() => setIsShown(false), 5000);
             })
             .catch(err => {
                 setError(err.data);
@@ -59,12 +69,13 @@ const RegisterForm = () => {
             />
             <TextField
                 id="password_confirm"
-                title="Password"
+                title="Confirm Password"
                 type="password"
                 isError={error && (error.path === "password_confirm" || error.path === "")}
                 error={error && error.path === "password_confirm" && error.message}
             />
             <span className="min-h-[14px] text-center text-sm text-red-600">{error && error.path === "" && error.message}</span>
+
             <button
                 type="submit"
                 className="h-[52px] flex justify-center items-center bg-navy-light shadow-xl 
@@ -74,16 +85,19 @@ const RegisterForm = () => {
             >
                 {isLoading ? <Loader variant="secondary" /> : "Sign Up"}
             </button>
-            {isShown &&
-                <SnackBar
-                    text="Registration is success. Sign in to use the application"
-                    onClose={handleCloseSnackBar}
-                />
-            }
+
+            <AnimatePresence>
+                {isShown && 
+                    <SnackBar onClose={handleCloseSnackBar}>
+                        <span className="flex gap-x-1">
+                            Registration is successfully completed. 
+                            <Link className="text-navy-light font-bold hover:underline hover:text-navy-normal" to="/auth/login">Sign In</Link>
+                        </span>
+                    </SnackBar>
+                }
+            </AnimatePresence>
         </form>
     );
 }
-
-
 
 export default RegisterForm;
