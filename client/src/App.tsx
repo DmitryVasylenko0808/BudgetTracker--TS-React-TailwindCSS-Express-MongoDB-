@@ -14,6 +14,7 @@ import { useAppDispatch, useAppSelect } from './redux/hooks';
 import { setUserInfo } from './redux/slices/authSlice';
 import { useAuth } from './hooks/auth';
 import SearchTransactionsPage from './pages/SearchTransactionsPage';
+import AddTransactionPage from './pages/AddTransactionPage';
 
 const App = () => {
   const { token } = useAuth();
@@ -35,10 +36,11 @@ const App = () => {
       <Route path="/" element={<MainLayout />}>
         <Route element={<RequireAuth />}>
           <Route index element={<TransactionsPage />} />
-          <Route path="/search/:value" element={<SearchTransactionsPage />} />
+          <Route path="/add_transaction" element={<AddTransactionPage />} />
           <Route path="/categories" element={<CategoriesPage />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/evolution" element={<EvolutionPage />} />
+          <Route path="/search/:value" element={<SearchTransactionsPage />} />
         </Route>
       </Route>
       <Route path="auth" element={<AuthLayout />}>

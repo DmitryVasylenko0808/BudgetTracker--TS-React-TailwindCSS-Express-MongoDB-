@@ -17,7 +17,7 @@ body {
 }
 
 .navlink {
-    @apply block px-4 py-7 hover:bg-navy-normal;
+    @apply block w-full py-7 flex justify-center hover:bg-navy-normal;
 }
 
 .navlink.active {

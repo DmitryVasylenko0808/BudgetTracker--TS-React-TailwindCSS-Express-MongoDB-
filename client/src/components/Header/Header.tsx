@@ -26,17 +26,26 @@ const Header = () => {
                         <h1 className="text-2xl tracking-wide font-bold">MyBudget</h1>
                     </a>
                     <NavBar />
-                    <div className="ml-4 flex-auto flex items-center justify-between">
-                        <SearchBar />
-                        <div className="flex gap-x-2">
+                    <div className="ml-4 flex-auto flex items-center justify-between gap-x-6">
+                        <div className="w-[270px]">
+                            <SearchBar />
+                        </div>
+                        <div className="group relative">
                             <div className="flex-auto text-white flex items-center gap-x-2">
                                 <HiUser size={30} />
                                 <span className="text-lg tracking-wide">{login}</span>
                             </div>
-                            <button onClick={handleLogOutClick} className="w-[145px] px-4 py-6 text-white flex items-center gap-x-2 hover:bg-navy-normal">
-                                <HiLogout size={30} />
-                                <span className="text-lg tracking-wide">Log Out</span>
-                            </button>
+                            <div className="hidden absolute top-[30px] left-[-65px] group-hover:block">
+                                <button 
+                                    onClick={handleLogOutClick} 
+                                    className="w-[145px] px-4 py-3 bg-white border border-gray-light shadow-xl 
+                                    flex items-center gap-x-2 text-navy-light 
+                                    hover:bg-gray-light"
+                                >
+                                    <HiLogout size={30} />
+                                    <span className="text-lg tracking-wide">Log Out</span>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

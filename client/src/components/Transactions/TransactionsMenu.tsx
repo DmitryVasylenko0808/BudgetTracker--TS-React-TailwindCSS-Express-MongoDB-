@@ -5,28 +5,15 @@ import SelectItem from "../SelectItem";
 import TransactionFilter from "./TransactionsFilter";
 
 type TransactionsMenuProps = {
-    isRemovedAdd: boolean
     isDisabledEdit: boolean,
-    isDisabledDelete: boolean
-    onAdd: () => void;
+    isDisabledDelete: boolean,
     onEdit: () => void,
     onDelete: () => void,
 };
 
-const TransactionsMenu = ({ isRemovedAdd, isDisabledEdit, isDisabledDelete, onAdd, onEdit, onDelete }: TransactionsMenuProps) => {
+const TransactionsMenu = ({ isDisabledEdit, isDisabledDelete, onEdit, onDelete }: TransactionsMenuProps) => {
     return (
         <div className="flex items-center gap-x-4">
-            {!isRemovedAdd && 
-                <button
-                    onClick={onAdd}
-                    className="w-[160px] py-2 bg-navy-light shadow-xl 
-                    inline-flex justify-center items-center gap-x-2
-                    text-lg text-white font-bold hover:bg-navy-normal"
-                >
-                    <HiPlus size={30} />
-                    ADD
-                </button>
-            }
             <button
                 onClick={onEdit}
                 className="w-[160px] py-2 inline-flex items-center justify-center gap-x-2 

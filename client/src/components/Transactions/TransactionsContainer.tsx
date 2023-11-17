@@ -16,7 +16,6 @@ type TransactionsContainerProps = {
 }
 
 const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainerProps) => {
-    const [isOpenAdd, setIsOpenAdd] = useState<boolean>(false);
     const [isEditOpen, setIsOpenEdit] = useState<boolean>(false);
     const [selectedTransactions, setSelectedTransactions] = useState<Transaction[]>([]);
     const [searchParams] = useSearchParams();
@@ -33,8 +32,6 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
         setSelectedTransactions([]);
     }, [data]);
 
-    const handleOpenAddModal = () => setIsOpenAdd(true);
-    const handeCloseAddModal = () => setIsOpenAdd(false);
     const handleOpenEditModal = () => setIsOpenEdit(true);
     const handeCloseEditModal = () => {
         setIsOpenEdit(false);
@@ -65,11 +62,7 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
     const handleDeleteTransactions = () => {
         const ids = selectedTransactions.map(t => t._id);
 
-        deleteTransactions({ ids })
-            .unwrap()
-            .then(() => { })
-            .catch(err => { })
-            .finally(() => setSelectedTransactions([])) //
+        deleteTransactions({ ids }).unwrap() //
     }
 
     return (
@@ -83,10 +76,8 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
                     } 
                 />
                 <TransactionsMenu
-                    isRemovedAdd={isSearch}
                     isDisabledEdit={!selectedTransactions.length || selectedTransactions.length > 1}
                     isDisabledDelete={!selectedTransactions.length}
-                    onAdd={handleOpenAddModal}
                     onEdit={handleOpenEditModal}
                     onDelete={handleDeleteTransactions}
                 />
@@ -102,10 +93,6 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
                   />
                 : <h3 className="text-center text-gray-strength font-bold">No data</h3>
             }
-
-            <Modal isOpen={isOpenAdd} onClose={handeCloseAddModal}>
-                <AddTransactionForm onCloseModal={handeCloseAddModal} />
-            </Modal>
 
             <Modal isOpen={!!selectedTransactions.length && isEditOpen} onClose={handeCloseEditModal}>
                 {selectedTransactions.length && 
