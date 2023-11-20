@@ -31,7 +31,7 @@ const TransactionsTable = ({ transactions, selectedTransactions, isSelectedAll, 
                     <TransactionsTableItem
                         transaction={t}
                         isSelected={!!selectedTransactions.find(s => s._id === t._id)}
-                        onSelect={() => onSelectItem(t._id)}
+                        onSelect={onSelectItem}
                         key={t._id}
                     />
                 )}

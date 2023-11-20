@@ -8,16 +8,16 @@ import CheckBox from "../CheckBox";
 type TransactionsTableItemProps = {
     isSelected: boolean,
     transaction: Transaction,
-    onSelect: () => void
+    onSelect: (id: string) => void
 };
 
 const TransactionsTableItem = ({ isSelected, transaction, onSelect }: TransactionsTableItemProps) => {
     const selectedClassName = isSelected ? "bg-navy-light/20 odd:bg-navy-light/20" : "";
 
     return (
-        <tr onClick={onSelect} className={`flex odd:bg-gray-light/50 hover:bg-navy-light/20 ${selectedClassName}`}>
+        <tr className={`flex odd:bg-gray-light/50 hover:bg-navy-light/20 ${selectedClassName}`}>
             <td className="px-4 py-2 border-x border-gray-light">
-                <CheckBox isChecked={isSelected} onChange={onSelect} />
+                <CheckBox isChecked={isSelected} onChange={() => onSelect(transaction._id)} />
             </td>
             <td className="px-4 py-2 border-x border-gray-light w-[160px]">{formatDate(transaction.date as Date)}</td>
             <td className="px-4 py-2 border-x border-gray-light flex-auto">{transaction.description}</td>
