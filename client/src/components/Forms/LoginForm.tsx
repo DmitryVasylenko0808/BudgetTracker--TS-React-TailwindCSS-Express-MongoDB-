@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useSignInUserMutation } from "../../redux/services/authApi";
 import { useNavigate } from "react-router";
-import TextField from "../TextField";
+import TextField from "../Commons/TextField";
 import { useAppDispatch } from "../../redux/hooks";
 import { setUserInfo } from "../../redux/slices/authSlice";
-import Loader from "../Loader";
+import Loader from "../Commons/Loader";
 
 type LoginFormFields = {
     login: { value: string },

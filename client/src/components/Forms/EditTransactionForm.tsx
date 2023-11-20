@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
-import TextField from "../TextField";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import TextField from "../Commons/TextField";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 import { Category, CategoryType, Transaction } from "../../redux/services/types";
-import DatePicker from "../DatePicker";
+import DatePicker from "../Commons/DatePicker";
 import { useEditTransactionMutation } from "../../redux/services/transactionApi";
-import Loader from "../Loader";
+import Loader from "../Commons/Loader";
 
 type EditTransactionFormProps = {
     transaction: Transaction,

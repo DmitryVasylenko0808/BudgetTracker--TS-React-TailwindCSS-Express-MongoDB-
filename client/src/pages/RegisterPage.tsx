@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import TextField from "../components/TextField";
+import TextField from "../components/Commons/TextField";
 import RegisterForm from "../components/Forms/RegisterForm";
 
 const RegisterPage = () => {

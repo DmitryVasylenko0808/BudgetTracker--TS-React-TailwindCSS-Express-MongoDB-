@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { Outlet } from "react-router";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const AuthLayout = () => {
     return (

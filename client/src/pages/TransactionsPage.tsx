@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { CategoryType } from "../redux/services/types";
-import Select from "../components/Select";
-import SelectItem from "../components/SelectItem";
+import Select from "../components/Commons/Select";
+import SelectItem from "../components/Commons/SelectItem";
 import MonthSelect from "../components/Transactions/MonthSelect";
 import TransactionsContainer from "../components/Transactions/TransactionsContainer";
 import { useGetTransactionQuery } from "../redux/services/transactionApi";
 import { useDate } from "../hooks/date";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const TransactionsPage = () => {
     const defaultMonth = 1;

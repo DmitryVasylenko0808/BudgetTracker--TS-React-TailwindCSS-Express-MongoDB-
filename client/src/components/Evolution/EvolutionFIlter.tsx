@@ -1,6 +1,6 @@
 import React from "react";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 import { Category } from "../../redux/services/types";
 
 type EvolutionFilterProps = {

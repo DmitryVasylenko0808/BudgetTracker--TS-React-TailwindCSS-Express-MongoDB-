@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDeleteCategoryMutation, useGetCategoriesQuery } from "../redux/services/categoriesApi";
 import MenuCategories from "../components/Categories/MenuCategories";
-import Modal from "../components/Modal";
+import Modal from "../components/Commons/Modal";
 import AddCategoryForm from "../components/Forms/AddCategoryForm";
 import CategoryItem from "../components/Categories/Category";
 import RenameCategoryForm from "../components/Forms/RenameCategoryForm";
-import Select from "../components/Select";
-import SelectItem from "../components/SelectItem";
+import Select from "../components/Commons/Select";
+import SelectItem from "../components/Commons/SelectItem";
 import { Category, CategoryType } from "../redux/services/types";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const CategoriesPage = () => {
     const [typeFilter, setTypeFilter] = useState<CategoryType>("Outcome");

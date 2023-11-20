@@ -1,7 +1,7 @@
 import React from "react";
 import { Transaction } from "../../redux/services/types";
 import TransactionsTableItem from "./TransactionTableItem";
-import CheckBox from "../CheckBox";
+import CheckBox from "../Commons/CheckBox";
 
 type TransactionsTableProps = {
     transactions: Transaction[],

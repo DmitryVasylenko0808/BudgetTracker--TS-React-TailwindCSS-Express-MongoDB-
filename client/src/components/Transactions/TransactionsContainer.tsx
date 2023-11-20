@@ -3,7 +3,7 @@ import { useSearchParams } from "react-router-dom";
 import { Transaction } from "../../redux/services/types";
 import { useDeleteTransactionsMutation } from "../../redux/services/transactionApi";
 import TransactionsMenu from "./TransactionsMenu";
-import Modal from "../Modal";
+import Modal from "../Commons/Modal";
 import EditTransactionForm from "../Forms/EditTransactionForm";
 import TransactionsTable from "./TransactionsTable";
 import TransactionsTotal from "./TransactionsTotal";

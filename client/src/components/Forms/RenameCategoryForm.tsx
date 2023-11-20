@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useRenameCategoryMutation } from "../../redux/services/categoriesApi";
-import TextField from "../TextField";
+import TextField from "../Commons/TextField";
 import { Category } from "../../redux/services/types";
-import Loader from "../Loader";
+import Loader from "../Commons/Loader";
 
 type RenameCategoryFormProps = {
     category: Category,

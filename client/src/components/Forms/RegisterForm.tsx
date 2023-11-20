@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useSignUpUserMutation } from "../../redux/services/authApi";
-import TextField from "../TextField";
-import SnackBar from "../SnackBar";
-import Loader from "../Loader";
+import TextField from "../Commons/TextField";
+import SnackBar from "../Commons/SnackBar";
+import Loader from "../Commons/Loader";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 

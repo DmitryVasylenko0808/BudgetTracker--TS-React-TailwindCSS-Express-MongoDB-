@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
-import TextField from "../TextField";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import TextField from "../Commons/TextField";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 import { Category, CategoryType } from "../../redux/services/types";
-import DatePicker from "../DatePicker";
+import DatePicker from "../Commons/DatePicker";
 import { useAddTransactionMutation } from "../../redux/services/transactionApi";
-import Loader from "../Loader";
-import SnackBar from "../SnackBar";
+import Loader from "../Commons/Loader";
+import SnackBar from "../Commons/SnackBar";
 import { AnimatePresence } from "framer-motion";
 
 

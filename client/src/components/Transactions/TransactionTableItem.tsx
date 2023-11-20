@@ -2,7 +2,7 @@ import React from "react";
 import { HiArrowNarrowDown, HiArrowNarrowUp } from "react-icons/hi";
 import { Transaction } from "../../redux/services/types";
 import { formatDate } from "../../utils/formatDate"; //
-import CheckBox from "../CheckBox";
+import CheckBox from "../Commons/CheckBox";
 
 
 type TransactionsTableItemProps = {

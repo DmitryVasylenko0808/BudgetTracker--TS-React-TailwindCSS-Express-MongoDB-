@@ -5,7 +5,7 @@ import EvolutionChart from "../components/Evolution/EvolutionChart";
 import { useGetCategoriesQuery } from "../redux/services/categoriesApi";
 import { StatisticData } from "../redux/services/types";
 import EvolutionFilter from "../components/Evolution/EvolutionFIlter";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const EvolutionPage = () => {
     const [hiddenEmpty, setIsHiddenEmpty] = useState<boolean>(false);

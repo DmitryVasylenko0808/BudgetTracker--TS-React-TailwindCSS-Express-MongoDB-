@@ -1,7 +1,7 @@
 import { useDate } from "../../hooks/date";
 import { CategoryType } from "../../redux/services/types";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 
 type ReportsFilterProps = {
     currentYear: string | number,

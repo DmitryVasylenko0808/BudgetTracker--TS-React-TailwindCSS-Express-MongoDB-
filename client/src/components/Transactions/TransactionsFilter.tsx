@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { HiOutlineX } from "react-icons/hi";
 import { MdOutlineFilterAlt, MdOutlineFilterAltOff } from "react-icons/md";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 import { useGetCategoriesQuery } from "../../redux/services/categoriesApi";
 import { useSearchParams } from "react-router-dom";
 import { CategoryType } from "../../redux/services/types";

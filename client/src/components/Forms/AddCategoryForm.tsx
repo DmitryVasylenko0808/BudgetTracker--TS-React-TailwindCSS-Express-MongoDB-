@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useAddCategoryMutation } from "../../redux/services/categoriesApi";
-import TextField from "../TextField";
-import Select from "../Select";
-import SelectItem from "../SelectItem";
+import TextField from "../Commons/TextField";
+import Select from "../Commons/Select";
+import SelectItem from "../Commons/SelectItem";
 import { CategoryType } from "../../redux/services/types";
-import Loader from "../Loader";
+import Loader from "../Commons/Loader";
 
 type AddCategoryFormProps = {
     onCloseModal?: () => void

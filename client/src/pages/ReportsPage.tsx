@@ -5,7 +5,7 @@ import { CategoryType } from "../redux/services/types";
 import ReportsFilter from "../components/Reports/ReportsFilter";
 import ReportsTable from "../components/Reports/ReportsTable";
 import { useDate } from "../hooks/date";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const ReportsPage = () => {
     const { minYear } = useDate();

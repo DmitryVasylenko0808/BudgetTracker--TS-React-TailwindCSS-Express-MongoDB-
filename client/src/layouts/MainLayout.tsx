@@ -1,7 +1,7 @@
 import React, { Suspense } from "react";
 import Header from "../components/Header/Header";
 import { Outlet } from "react-router";
-import Loader from "../components/Loader";
+import Loader from "../components/Commons/Loader";
 
 const MainLayout = () => {
     return (
