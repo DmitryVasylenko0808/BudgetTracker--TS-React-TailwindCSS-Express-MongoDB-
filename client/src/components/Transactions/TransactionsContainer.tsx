@@ -40,9 +40,6 @@ const TransactionsContainer = ({ data, isSearch = false }: TransactionsContainer
     const handleSelectTransaction = (id: string) => {
         const transaction = data?.find(t => t._id === id);
 
-        console.log("handle select", id);
-        console.log(transaction);
-
         if (transaction) {
             if (selectedTransactions.find(t => transaction._id === t._id)) {
                 const newTransactions = selectedTransactions.filter(s => s._id !== transaction._id)

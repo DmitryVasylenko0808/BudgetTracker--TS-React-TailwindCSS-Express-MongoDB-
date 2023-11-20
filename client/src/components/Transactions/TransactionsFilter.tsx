@@ -32,7 +32,7 @@ const TransactionFilter = () => {
             month: searchParams.get("month") as string,
             type: type as string,
             category: searchParams.get("category") as string 
-        }) //
+        }) 
     }
 
     const handleSelectCategory = (category: string) => {
